@@ -8,6 +8,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from './Avatar';
+import Button from '@material-ui/core/Button';
+import CardActions from '@material-ui/core/CardActions';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   card: {
@@ -29,6 +32,14 @@ export default () => {
           <ListItem>
             <Avatar>2</Avatar>
             <ListItemText primary="Add ability to select Metrics" />
+            <CardActions>
+              <Button size="small" color="primary">
+                <Link to="/dashboard">Dashboard</Link>
+              </Button>
+              <Button size="small" color="primary">
+                <Link to="/chart">Chart</Link>
+              </Button>
+            </CardActions>
           </ListItem>
           <ListItem>
             <Avatar>3</Avatar>

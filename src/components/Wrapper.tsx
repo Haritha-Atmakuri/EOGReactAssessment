@@ -1,15 +1,24 @@
-import * as React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
+import { withStyles, Theme } from '@material-ui/core';
+import { TypeBackground } from '@material-ui/core/styles/createPalette';
 
-const useStyles = makeStyles({
+interface BackgroundWithMain extends TypeBackground {
+  main: string;
+}
+
+const styles = (theme: Theme) => ({
   wrapper: {
-    height: '100vh',
+    background: (theme.palette.background as BackgroundWithMain).main,
+    height: '90vh',
   },
 });
 
-const Wrapper: React.FC = ({ children }) => {
-  const classes = useStyles();
+interface Props {
+  classes: any;
+}
+
+const Wrapper: React.SFC<Props> = ({ classes, children }) => {
   return <div className={classes.wrapper}>{children}</div>;
 };
 
-export default Wrapper;
+export default withStyles(styles)(Wrapper);

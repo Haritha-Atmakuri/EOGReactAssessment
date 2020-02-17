@@ -1,28 +1,39 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import { makeStyles } from '@material-ui/core/styles';
-import Weather from '../Features/Weather/Weather';
+import { connect } from 'react-redux';
+import { Typography, AppBar, Toolbar, LinearProgress } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
+import Weather from './Weather';
+import { Store } from '../store';
+
+const styles = {
   grow: {
     flexGrow: 1,
   },
-});
+};
 
-export default () => {
-  const classes = useStyles();
+interface Props {
+  classes: any;
+  loading: boolean;
+}
 
-  const name = "Haritha's";
+const Header: React.SFC<Props> = ({ classes, loading }) => {
+  const name = "Haritha";
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" color="inherit" className={classes.grow}>
-          {name} EOG React Visualization Assessment
-        </Typography>
-        <Weather />
-      </Toolbar>
-    </AppBar>
+    <>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" color="inherit" className={classes.grow}>
+            {name} EOG React Visualization Assessment
+          </Typography>
+          <Weather />
+        </Toolbar>
+      </AppBar>
+      {loading && <LinearProgress />}
+    </>
   );
 };
+
+export default connect(({ drone: { loading } }: Store) => ({ loading }))(
+  withStyles(styles)(Header)
+);
